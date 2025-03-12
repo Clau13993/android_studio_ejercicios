@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     var usuario: Usuario?=null
     var vehiculos: MutableList<Vehiculo> = mutableListOf()
+    var nombreUsuario:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         insertarVehiculos()
         setSupportActionBar(binding.toolbar)
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
