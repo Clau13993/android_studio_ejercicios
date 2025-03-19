@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     var usuario: Usuario?=null
     var vehiculos: MutableList<Vehiculo> = mutableListOf()
-    var nombreUsuario:String?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

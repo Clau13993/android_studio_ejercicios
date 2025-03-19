@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.ejercicio4.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="Inicio"
         tools:layout="@layout/fragment_first">
 
         <action
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.ejercicio4.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Datos"
         tools:layout="@layout/fragment_second">
 
         <action
@@ -31,8 +31,8 @@
     <fragment
         android:id="@+id/thirdFragment"
         android:name="com.example.ejercicio4.ThirdFragment"
-        android:label="fragment_third"
-        tools:layout="@layout/fragment_third" >
+        android:label="Compra"
+        tools:layout="@layout/fragment_third">
         <action
             android:id="@+id/action_thirdFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
