@@ -9,24 +9,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ejercicio4.databinding.FragmentFirstBinding
 import com.example.ejercicio4.databinding.FragmentThirdBinding
+import com.example.ejercicio4.recyclerView.Adaptador
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ThirdFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ThirdFragment : Fragment() {
 
     private var _binding: FragmentThirdBinding? = null
@@ -50,74 +44,12 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        binding.ffrvVehiculos.layoutManager=LinearLayoutManager(activity as MainActivity)
+        binding.ffrvVehiculos.adapter=Adaptador((activity as MainActivity).miVM.vehiculos)
 
-        var edadUsuario = (activity as MainActivity).usuario?.edad
-        var listaChecks:MutableList<CheckBox> = mutableListOf()
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-// Add menu items here
-                menuInflater.inflate(R.menu.menu_third_fragment, menu)
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-// Handle the menu selection
-                return when (menuItem.itemId) {
-                    R.id.action_comprar_vehiculos-> {
-                        for ((indice, elemento) in listaChecks.withIndex()){
-                            if (elemento.isChecked){
-                                (activity as MainActivity).usuario?.vehiculosComprados?.add((activity as MainActivity).vehiculos[indice])
-                            }
-                        }
-                        findNavController().navigate(R.id.action_thirdFragment_to_FirstFragment)
-                        true
-                    }
-
-                    else-> false
-                }
-            }
-        },viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-
-        for ((indice,elemento) in(activity as MainActivity).vehiculos.withIndex()){
-            if (edadUsuario != null) {
-                if (edadUsuario >= 18) {
-                    val checkbox = CheckBox(context)
-                    checkbox.text = elemento.modelo
-                    checkbox.id = indice
-                    binding.tfllVehiculos.addView(checkbox)
-                    listaChecks.add(checkbox)
-                } else {
-                    if (elemento.tipo != "coche") {
-                        val checkbox = CheckBox(context)
-                        checkbox.text = elemento.modelo
-                        checkbox.id = indice
-                        binding.tfllVehiculos.addView(checkbox)
-                        listaChecks.add(checkbox)
-                    }
-                }
-            }
-        }
-
-        /*
-        binding.tfbComprar.setOnClickListener{
-            binding.tflVehiculos.forEach { control ->
-                if (control is CheckBox){
-                    if (control.isChecked){
-                        vehiculosComprados += "${control.text}\n"
-                        (activity as MainActivity).usuario?.vehiculos?.add
-       }
-         */
-
-        binding.tfbComprar.setOnClickListener{
-            for ((indice, elemento) in listaChecks.withIndex()){
-                if (elemento.isChecked){
-                    (activity as MainActivity).usuario?.vehiculosComprados?.add((activity as MainActivity).vehiculos[indice])
-                }
-            }
-            findNavController().navigate(R.id.action_thirdFragment_to_FirstFragment)
-        }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -18,9 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.ejercicio4.databinding.FragmentSecondBinding
 import com.example.ejercicio4.modelo.Usuario
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
@@ -53,8 +50,9 @@ class SecondFragment : Fragment() {
                     R.id.action_insertar-> {
                         if (validarDatos(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())){
                             val usuario = Usuario(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())
-                            (activity as MainActivity).usuario = usuario
-                            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                            (activity as MainActivity).miVM.usuario = usuario
+                            findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
+
                         }
                         true
                     }
@@ -68,8 +66,8 @@ class SecondFragment : Fragment() {
         binding.sfbVolver.setOnClickListener{
             if (validarDatos(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())){
                 val usuario = Usuario(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())
-                (activity as MainActivity).usuario = usuario
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                (activity as MainActivity).miVM.usuario = usuario
+                findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
             }
         }
 

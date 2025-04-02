@@ -44,9 +44,9 @@ class FirstFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        var nombreUsuario = (activity as MainActivity).usuario?.nombre
-        var apellidoUsuario = (activity as MainActivity).usuario?.apellido
-        var listaVehiculosComprados = (activity as MainActivity).usuario?.vehiculosComprados
+        var nombreUsuario = (activity as MainActivity).miVM.usuario?.nombre
+        var apellidoUsuario = (activity as MainActivity).miVM.usuario?.apellido
+        var listaVehiculosComprados = (activity as MainActivity).miVM.usuario?.vehiculosComprados
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -58,12 +58,12 @@ class FirstFragment : Fragment() {
 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.action_insertar_datos-> {
-                        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
                         true
                     }
                     R.id.action_comprar->{
                         if (nombreUsuario != null) {
-                            findNavController().navigate(R.id.action_FirstFragment_to_thirdFragment)
+                            findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                         }else{
                             val toastCompletar = Toast.makeText(activity,"Rellena primero el formulario", Toast.LENGTH_LONG)
                             toastCompletar.show()
@@ -92,13 +92,13 @@ class FirstFragment : Fragment() {
         }
 
         binding.ffbDatos.setOnClickListener{
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                    findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
                 }
 
 
         binding.ffbComprar.setOnClickListener{
             if (nombreUsuario != null) {
-                findNavController().navigate(R.id.action_FirstFragment_to_thirdFragment)
+                findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
             }else{
                 val toastCompletar = Toast.makeText(activity,"Rellena primero el formulario", Toast.LENGTH_LONG)
                 toastCompletar.show()

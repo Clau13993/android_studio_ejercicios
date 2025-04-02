@@ -9,8 +9,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.example.ejercicio4.databinding.ActivityMainBinding
 import com.example.ejercicio4.modelo.Usuario
+import com.example.ejercicio4.modelo.VM
 import com.example.ejercicio4.modelo.Vehiculo
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    var usuario: Usuario?=null
-    var vehiculos: MutableList<Vehiculo> = mutableListOf()
+    val miVM: VM by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,20 +37,15 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-        }
     }
 
     fun insertarVehiculos(){
-        vehiculos.add(Vehiculo("moto","moto1",1250.00))
-        vehiculos.add(Vehiculo("moto","moto2",980.00))
-        vehiculos.add(Vehiculo("moto","moto3",880.00))
-        vehiculos.add(Vehiculo("coche","coche1",2500.00))
-        vehiculos.add(Vehiculo("coche","coche2",9800.00))
-        vehiculos.add(Vehiculo("coche","coche3",15000.00))
+        miVM.vehiculos.add(Vehiculo("moto","moto1",1250.00))
+        miVM.vehiculos.add(Vehiculo("moto","moto2",980.00))
+        miVM.vehiculos.add(Vehiculo("moto","moto3",880.00))
+        miVM.vehiculos.add(Vehiculo("coche","coche1",2500.00))
+        miVM.vehiculos.add(Vehiculo("coche","coche2",9800.00))
+        miVM.vehiculos.add(Vehiculo("coche","coche3",15000.00))
 
     }
 
