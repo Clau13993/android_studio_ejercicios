@@ -1,6 +1,8 @@
 package com.example.ejercicio4
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -38,6 +40,9 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val editor: SharedPreferences.Editor = (activity as MainActivity).datos.edit()
+
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -51,6 +56,12 @@ class SecondFragment : Fragment() {
                         if (validarDatos(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())){
                             val usuario = Usuario(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())
                             (activity as MainActivity).miVM.usuario = usuario
+
+                            editor.putString("nombre", binding.sfetNombre.text.toString())
+                            editor.putString("apellido",binding.sfetApellidos.text.toString())
+                            editor.putInt("edad",binding.sfetEdad.text.toString().toInt())
+                            editor.apply()
+
                             findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
 
                         }
@@ -67,6 +78,10 @@ class SecondFragment : Fragment() {
             if (validarDatos(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())){
                 val usuario = Usuario(binding.sfetNombre.text.toString(),binding.sfetApellidos.text.toString(),binding.sfetEdad.text.toString().toInt())
                 (activity as MainActivity).miVM.usuario = usuario
+                editor.putString("nombre", binding.sfetNombre.text.toString())
+                editor.putString("apellido",binding.sfetApellidos.text.toString())
+                editor.putInt("edad",binding.sfetEdad.text.toString().toInt())
+                editor.apply()
                 findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
             }
         }

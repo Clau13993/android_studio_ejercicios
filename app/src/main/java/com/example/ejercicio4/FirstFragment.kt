@@ -17,9 +17,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.ejercicio4.databinding.FragmentFirstBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
@@ -44,8 +41,12 @@ class FirstFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        var nombreUsuario = (activity as MainActivity).miVM.usuario?.nombre
-        var apellidoUsuario = (activity as MainActivity).miVM.usuario?.apellido
+
+        var nombre = (activity as MainActivity).datos.getString("nombre","")
+        var apellido = (activity as MainActivity).datos.getString("apellido","")
+
+        //var nombreUsuario = (activity as MainActivity).miVM.usuario?.nombre
+        //var apellidoUsuario = (activity as MainActivity).miVM.usuario?.apellido
         var listaVehiculosComprados = (activity as MainActivity).miVM.usuario?.vehiculosComprados
 
         val menuHost: MenuHost = requireActivity()
@@ -62,7 +63,7 @@ class FirstFragment : Fragment() {
                         true
                     }
                     R.id.action_comprar->{
-                        if (nombreUsuario != null) {
+                        if (nombre != "") {
                             findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                         }else{
                             val toastCompletar = Toast.makeText(activity,"Rellena primero el formulario", Toast.LENGTH_LONG)
@@ -76,8 +77,8 @@ class FirstFragment : Fragment() {
         },viewLifecycleOwner, Lifecycle.State.RESUMED)
 
 
-        if (nombreUsuario !=null && apellidoUsuario != null){
-            binding.fftvDatos.text = "Bienvenid@ $nombreUsuario $apellidoUsuario!"
+        if (nombre !="" && apellido != ""){
+            binding.fftvDatos.text = "Bienvenid@ $nombre $apellido!"
         }else{
             binding.fftvDatos.text = "Bienvenid@!"
         }
@@ -97,7 +98,7 @@ class FirstFragment : Fragment() {
 
 
         binding.ffbComprar.setOnClickListener{
-            if (nombreUsuario != null) {
+            if (nombre != "") {
                 findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
             }else{
                 val toastCompletar = Toast.makeText(activity,"Rellena primero el formulario", Toast.LENGTH_LONG)
